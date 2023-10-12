@@ -1,0 +1,6 @@
+This program is fully functional to the specifications.
+To specify the number of traingers to spawn:
+    Run the program using ./poke327 --numtrainers.
+    Otherwise, I have it hardcoded to spawn 6-12 NPCs with 1 rival and 1 hiker guaranteed if no argument is provided.
+All movement works for each kind of NPC and continues forever until the user kills the program.
+The PC does not move at all from it's spawn point.

@@ -1,0 +1,16 @@
+9/1/2023 10:00 AM: Had issues with sqrt() function
+
+9/1/2023 1:05 PM: Realized the issue with sqrt() function was that my Makefile compilation didn't have -lm
+                  Built the 3x3 kernel matrices
+
+9/1/2023 1:20 PM: Made kernel multiplication functions and edge-pixel detector
+                  Visited TA Office Hours for assistance
+                  Figured out what I was doing wrong when trying to pass argument into the program
+                    I was trying to compile with argument, not run with argument
+                  Updated the read_pgm() function to take in the argument
+                  Realized I flipped the matrix value calculation for image and K_? (lines 133 and 134)
+                    Fixed by making it image[r - 1 + j][c - 1 + i] * K_?[j][i]
+
+9/1/2023 2:00 PM: Had my first successful edge detection
+                  Commented all of my code
+                  Made my README file

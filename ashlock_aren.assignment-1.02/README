@@ -1,0 +1,7 @@
+This program is capable of generating a world of maps to the complete specifications of the assignment.
+Each map meets the previous criteria from Assignment 1.01.
+Able to execute the 6 commands (illegal commands are ignored).
+Going from map to map connects existing gates.
+If at a map on the edge of the world, the edge gates aren't spawned.
+On that note, if a user is on the edge and tries to move out of bounds, it ignores that command.
+I applied the probability equation of spawning buildings aside from the starting map (guaranteed to spawn in map (0, 0)).

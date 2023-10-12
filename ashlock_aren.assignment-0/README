@@ -1,0 +1,3 @@
+- This program takes a .pgm file, applies a sobel filter, then outputs a file named "sobel.pgm"
+- My output generates the edges for the most part (not perfection, but close enough)
+- The only file is aashlock_assignment0.c

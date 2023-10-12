@@ -1,0 +1,5 @@
+This program is capable of generating a map to the complete specifications of the assignment.
+It spawns at least 2 regions of tall grass and 1 region of water.
+It has the potential to spawn additional of those regions and spawns a region of boulders.
+Additionally, it scatters trees and boulders around the map.
+There are 2 paths with a Pokemon Center and a Pokemart accessible.

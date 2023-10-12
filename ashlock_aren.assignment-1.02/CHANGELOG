@@ -1,0 +1,36 @@
+9/5/2023 9:10 AM
+    - Made the files for the assignment
+    - Created the Makefile script
+    - Wrote the code to generate the borders and small grass
+    - Wrote the code to print the map
+
+9/6/2023 8:20 PM
+    - Wrote the code to generate the entrances and exits for the paths
+    - Wrote the code to generate 2 regions of tall grass and 1 region of water
+    - Wrote the code to generate the N->S road and the W->E road
+
+9/7/2023 1:30 PM
+    - Moved the code to generate the base map and print the map into functions outside of main and call them within main
+
+9/8/2023 2:00 PM
+    - Rewrote the code to generate terrain since my original version were square patches
+        - I also put this in a separate function and call it from my main
+    - Rewrote the code to generate the roads
+    - Wrote the code to spawn the Pokemon Center and the Pokemart
+
+9/13/2023 9:00 PM
+    - Changed the map to be a struct for this round of development
+    - Moved the terrain generation functions (from 1.01) to a new file called "terrain.c" and modified accordingly to work with the struct
+    - Changed a little functionality so that the gates were stored in the struct for future reference
+    - Added the equation for probability of generating a Pokemon Center and Pokemart
+
+9/14/2023 1:15 PM
+    - Added functionality for the commands
+
+9/15/2023 1:00 PM
+    - Fixed a bug that was preventing the gates from lining up
+    - Also fixed a bug that was reading in the newline character, so my map was printing twice
+    - Implemented some edge correction to "despawn" gates that are on the edge of the world
+
+9/16/2023 9:45 AM
+    - Fixed a bug that made my program crash when I flew to map (200, 200)

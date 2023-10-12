@@ -1,0 +1,6 @@
+This program continues to have the functionality of the previous assignments, but also incorporates the specifications from Assignment 1.03.
+Each map spawns a "player" character on a random road block.
+Using that position, we run Dijkstra's algorithm and print the costs from eachsquare.
+The hiker cost map prints first and the rival cost map prints below.
+You can still switch from map to map, it just spawns the player in a new random spot for each one.
+    ** The position of the player doesn't get stored for a map since that won't be necessary in the future. **
