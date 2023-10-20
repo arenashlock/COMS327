@@ -1,0 +1,8 @@
+This program is fully functional to the specifications.
+All key mappings are as specified per the instructions.
+    You can move the player around
+    If you are standing on top of a building, you can enter and exit
+    At any point, you may bring up a list of trainers and scroll through it if it is too large for the screen
+    When an NPC or the PC moves into one another (while the NPC is not defeated), a battle occurs
+        Pressing the escape key exits the battle and marks the NPC as defeated
+        Defeated NPCs no longer move
