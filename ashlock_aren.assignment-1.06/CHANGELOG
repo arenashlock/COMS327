@@ -1,0 +1,144 @@
+9/5/2023 9:10 AM
+    - Made the files for the assignment
+    - Created the Makefile script
+    - Wrote the code to generate the borders and small grass
+    - Wrote the code to print the map
+
+9/6/2023 8:20 PM
+    - Wrote the code to generate the entrances and exits for the paths
+    - Wrote the code to generate 2 regions of tall grass and 1 region of water
+    - Wrote the code to generate the N->S road and the W->E road
+
+9/7/2023 1:30 PM
+    - Moved the code to generate the base map and print the map into functions outside of main and call them within main
+
+9/8/2023 2:00 PM
+    - Rewrote the code to generate terrain since my original version were square patches
+        - I also put this in a separate function and call it from my main
+    - Rewrote the code to generate the roads
+    - Wrote the code to spawn the Pokemon Center and the Pokemart
+
+9/13/2023 9:00 PM
+    - Changed the map to be a struct for this round of development
+    - Moved the terrain generation functions (from 1.01) to a new file called "terrain.c" and modified accordingly to work with the struct
+    - Changed a little functionality so that the gates were stored in the struct for future reference
+    - Added the equation for probability of generating a Pokemon Center and Pokemart
+
+9/14/2023 1:15 PM
+    - Added functionality for the commands
+
+9/15/2023 1:00 PM
+    - Fixed a bug that was preventing the gates from lining up
+    - Also fixed a bug that was reading in the newline character, so my map was printing twice
+    - Implemented some edge correction to "despawn" gates that are on the edge of the world
+
+9/16/2023 9:45 AM
+    - Fixed a bug that made my program crash when I flew to map (200, 200)
+
+9/21/2023 4:00 PM
+    - Changed map generation to enumeration
+
+9/22/2023 6:45 AM
+    - Copied over the heap files and Dijkstra's algorithm from the path generation
+    - Modified the algorithm somewhat to get code compiling (segmentation fault though)
+
+9/22/2023 9:00 AM
+    - Made a header file for the player since it seems like we may want that in the future
+    - Added a function to spawn the player on a road
+
+9/22/2023 10:00 AM
+    - Removed the command functionality since we are only generating Dijkstra's algorithm once
+    - Put in code to print the Dijkstra values
+
+9/22/2023 3:00 PM
+    - Made switch cases for the terrain cost of each NPC
+    - Added a for loop to do the Dijkstra calculations
+    - Code is functional aside from a segmentation fault due to the while loop (occasionally functional with a temporary for loop)
+
+9/25/2023: 10:25 AM
+    - Went to the instructor's Office Hours and fixed the bug!
+        - The issue was that I didn't initialize to NULL, my conditional was accessing spots it wasn't supposed to
+
+9/25/2023 5:15 PM
+    - Fixed an error where the player only got spawned once, so sometimes the values were negative
+
+10/01/2023 2:00 PM
+    - Removed the unnecessary functionality from previous assignments
+
+10/04/2023 1:45 PM
+    - Collapsed all the files into just the heap files and the main file (ashlock_aren.assignment1.04)
+    - Changed my terrain cost array function to index the array given in 1.03 solution
+
+------ SWITCHED TO THE PROFESSOR'S CODE ------
+
+10/05/2023 2:00 PM
+    - Attempted to spawn NPCs into the game
+        - Lead to a segmentation fault
+
+10/08/2023 8:00 AM
+    - Realized I forgot to initialize the heap, so I implemented the necessary stuff which fixed the error
+    - Wrote the code to spawn the NPCs
+
+10/08/2023 8:45 PM
+    - Made the final part of the NPC spawn
+    - Wrote the movement functions for each kind of NPC
+        - Results in an error that generates one new map but gets stuck
+
+10/09/2023 8:50 AM
+    - Fixed the infinite loop issue
+        - Movement is still broken in some way
+
+10/09/2023 10:40 AM
+    - Implemented the input for the number of characters
+
+10/09/2023 7:15 PM
+    - Changed the input to be the proper format
+    - Started trying to debug where the movement issue is occurring (seems to be an issue with moving the rival/hiker only)
+    - Fixed the movement issue
+        - Realized I forgot to update the min value in finding the min spot to move to
+    - Only issue remaining is an infinite side-to-side when a character reaches the pc
+    - Fixed the loop issue
+        - Realized I was inserting into the heap twice
+
+10/16/2023 6:30 PM
+    - Implemented the ncurses library
+        - Included the initialization
+        - Updated the print_map method
+        - Modified the game loop to wait for user input
+    - Made it so there was baseline player movement and the ability to stay put or quit
+
+10/17/2023 9:15 AM
+    - Added in curses colors
+
+10/17/2023 2:15 PM
+    - Changed functionality so we detect ineligible terrain and don't move any character
+    - Made it so the battle funcationality is there
+
+10/17/2023 9:00 PM
+    - Implemented entering and exiting buildings
+    - Made a trainer list with up and down arrows
+
+10/18/2023 12:45 AM
+    - Fixed the battle function so that npcs stop moving and get marked as defeated
+    - Made it so both the npcs and the pc can initiate battles
+
+10/25/2023 8:45 PM
+    - Converted all the required C files to C++ files and updated the Makefile
+    - Fixed all the errors that come with the initial changeover
+
+10/28/2023 5:30 PM
+    - Changed structs to classes and implemented inheritance
+    - Fixed the structure of the code that pointed to pc and npc
+        - Also changed typedef calls to be the actual name
+    - Ran into a bug with movement (don't know how to conditionally cast)
+
+10/28/2023 10:30 PM
+    - Learned about dynamic casting and changed my casting in a few spots
+        - Added a destructor for the character class so there was correct polymorphism
+
+10/28/2023 11:00 AM
+    - Added the fly function back into the game
+
+10/29/2023 9:00 AM
+    - Coded portion for going through a gate
+        - Ran into crashing bug, not sure what is causing it

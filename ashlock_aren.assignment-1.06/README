@@ -1,0 +1,4 @@
+The code has been ported from C to C++ for the portions specified
+The user is able to fly to a certain map
+Had issues with going through a gate
+    Game just crashes and I don't understand where the logic could fail
