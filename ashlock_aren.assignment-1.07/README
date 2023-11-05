@@ -1,0 +1,5 @@
+This program compiles the game like normal, but exits it immediately.
+Following that, it prompts the user to enter a filename.
+This filename should be the name of the csv file, but without the .csv extension.
+After entering the filename, it checks pyrite and the $HOME environment for the file.
+If it finds it, it reads the data in, then prints out all the input data.
