@@ -1,0 +1,147 @@
+#!/usr/bin/env python2
+"""Quick, dirty script that will convert a csv file to yaml, spawn an editor
+for you to fiddle with it, then convert back to csv and replace the original
+file.
+
+Run me as: $0 some_file.csv [other_file.csv ...]
+
+The editor used is $EDITOR, of course.
+
+This script is not guaranteed to be even remotely reliable, so consider only
+using it on files in source control.
+"""
+
+import codecs
+import csv
+import os
+import subprocess
+import sys
+import tempfile
+import shlex
+
+try:
+    import yaml
+except ImportError:
+    sys.stderr.write("Please install PyYAML.\n")
+    sys.exit(13)
+
+# Try to use ordered dicts, so the YAML keys are in database table order
+odict = dict  # fall back to regular dict
+try:
+    from collections import OrderedDict as odict
+except ImportError:
+    try:
+        # This is a library for 2.4-2.6
+        from ordereddict import OrderedDict as odict
+    except ImportError:
+        pass
+
+# Tell PyYAML how to dump our ordered dict.
+# The items() is to avoid the sorting the library does automatically.
+# Needs to be added to SafeDumper manually, because we use safe_dump below, and
+# every Representer class has its own independent goddamn dict of these things
+from yaml.dumper import SafeDumper
+yaml.add_representer(
+    odict,
+    lambda dumper, data: dumper.represent_dict(data.items()),
+    Dumper=SafeDumper,
+)
+
+### Do actual work!
+infilenames = sys.argv[1:]
+
+all_data = []
+for infilename in infilenames:
+    data = []
+    with open(infilename) as infile:
+        reader = csv.reader(infile, lineterminator='\n')
+        column_names = [unicode(column) for column in next(reader)]
+
+        # Read data...
+        for row in reader:
+            datum = odict()
+            for col, value in zip(column_names, row):
+                # Skip empty values
+                if value:
+                    datum[col] = value.decode('utf-8')
+                    try:
+                        # Numbers to numbers
+                        if unicode(int(value)) == value:
+                            datum[col] = int(value)
+                    except ValueError:
+                        pass
+
+            data.append(datum)
+
+        file_info = odict((
+                ('name', infilename),
+                ('column_names', column_names),
+                ('rows', data),
+            ))
+    all_data.append(file_info)
+
+
+# Monkeypatch yaml to use > syntax for multiline text; easier to edit
+from yaml.emitter import Emitter
+orig_choose_scalar_style = Emitter.choose_scalar_style
+def new_choose_scalar_style(self):
+    if self.analysis is None:
+        self.analysis = self.analyze_scalar(self.event.value)
+    if self.analysis.multiline or len(self.analysis.scalar) > 80:
+        return '>'
+    return orig_choose_scalar_style(self)
+Emitter.choose_scalar_style = new_choose_scalar_style
+
+# Write to a tempfile
+with tempfile.NamedTemporaryFile(suffix='.yml') as tmp:
+    yaml.safe_dump(all_data, tmp,
+        default_flow_style=False,
+        allow_unicode=True,
+        indent=4,
+    )
+    del data  # reclaim rams!
+
+    error_line = ''  # used on errors
+    while True:
+        editor = shlex.split(os.environ['EDITOR'])
+        args = editor + [tmp.name]
+        if 'vim' in editor[0]:
+            # vim has an arg for jumping to a line:
+            args.append("+{0}".format(error_line))
+        elif 'kate' in editor[0]:
+            # so does kate!
+            args.append("-l {0}".format(error_line))
+
+        # Run the user's editor and wait for it to close
+        subprocess.Popen(args).wait()
+        tmp.seek(0)
+
+        try:
+            all_new_data = yaml.safe_load(tmp)
+            break
+        except yaml.YAMLError as e:
+            if hasattr(e, 'problem_mark'):
+                error_line = e.problem_mark.line + 1
+            else:
+                error_line = ''
+
+            print
+            print "Oh my god what have you done:"
+            print
+            print str(e)
+            print
+            print "Press Enter to try again, or I guess ctrl-c to bail."
+            raw_input()
+
+for dct in all_new_data:
+    filename = dct['name']
+    new_data = dct['rows']
+    column_names = dct['column_names']
+    with open(filename, 'wb') as outfile:
+        writer = csv.writer(outfile, lineterminator='\n')
+        writer.writerow([ column.encode('utf8') for column in column_names ])
+
+        for datum in new_data:
+            writer.writerow([
+                unicode(datum.get(column, '')).encode('utf-8') for column in column_names
+            ])
