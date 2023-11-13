@@ -1,0 +1,8 @@
+This program simulates a Pokemon game (for the most part).
+At the very beginning, the user is asked to select between 3 "starter" Pokemon.
+After choosing, the game plays like it has been for the past few assignments.
+If the user is in tall grass, there is a 10% encounter rate.
+    This generates a random Pokemon of varying levels (depending on the distance out from the center map).
+If the user gets into a battle with an NPC, all of their Pokemon get displayed.
+Both the tall grass and a battle just wait for any user input since they are a placeholder for now.
+All rates and chances comply with the specifications of the assignment.
