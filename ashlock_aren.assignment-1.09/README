@@ -1,0 +1,7 @@
+The Pokemon game is more playable after this weeks implementations.
+Battles are functional as per the specification.
+    If the player loses a battle, the game ends (very cut-throat).
+Players are able to catch wild Pokemon and run during wild encounters.
+Switching in Pokemon mid-battle is allowed.
+Battles with trainers go until someone runs out of Pokemon.
+The buildings have functionality for refilling items and healing Pokemon.
