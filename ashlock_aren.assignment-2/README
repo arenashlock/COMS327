@@ -1,0 +1,11 @@
+For assignment-2, I decided to make the best computer game, MINESWEEPER!
+All the controls for the game are in the game screen, but it is purely a keyboard input game.
+There are 2 modes the game runs in:
+    * First, you need to run 'make' to build the program
+    1. Run './minesweeper' to run the game like it is supposed to normally run
+    2. Run './minesweeper cheat' to run the game in cheat mode
+        This marks all the mines, so don't reveal those if you want to win!
+        The main reason for including this mode is for the TAs to be able to see that the game works as it should
+You can play as many games as you want (by pressing 'n' after each game), or you can quit.
+
+HAVE FUN!
